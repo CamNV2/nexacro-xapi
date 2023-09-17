@@ -9,6 +9,7 @@ import com.example.nexacro_xapi.service.TaskService;
 import com.nexacro.java.xapi.data.DataSet;
 import com.nexacro.java.xapi.tx.PlatformException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,5 +54,32 @@ public class TaskController {
         model.addAttribute("data", entity);
 
         return "nexacroView";
+    }
+
+    @PostMapping("/createTask")
+    public String createTask(Model model, HttpServletRequest request, HttpSession session) {
+        DataSet dataSet = NexacroConvert.getRequestData(request, "dsInput");
+        Map<String, String> group = new HashMap<>();
+        List<Map<String, String>> requestBody = NexacroConvert.convertDatasetToListMap(dataSet);
+        try {
+            String user = session.getAttribute("user").toString();
+
+            if (requestBody.size() != 0) {
+                group = taskService.saveGroup(requestBody.get(0),user);
+            }
+
+            List<Dataset> datasets = new ArrayList<>();
+            Dataset dataset = new Dataset();
+            dataset.setId("IDDataset");
+            dataset.setColumns(NexacroConvert.convertEntityToColumn(group));
+            datasets.add(dataset);
+            ResponseEntity entity = new ResponseEntity(0, "SUCCESS", datasets);
+            model.addAttribute("data", entity);
+
+            return "nexacroView";
+        }catch (Exception e){
+            throw e;
+        }
+
     }
 }
