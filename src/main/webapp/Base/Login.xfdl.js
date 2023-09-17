@@ -19,7 +19,7 @@
             
             // Object(Dataset, ExcelExportObject) Initialize
             obj = new Dataset("dsInput", this);
-            obj._setContents("<ColumnInfo><Column id=\"USER_LOGIN\" type=\"STRING\" size=\"256\"/><Column id=\"USER_PW\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"USER_LOGIN\">RYU</Col><Col id=\"USER_PW\">123</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"USER_LOGIN\" type=\"STRING\" size=\"256\"/><Column id=\"USER_PW\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -100,7 +100,13 @@
             this.addLayout(obj.name, obj);
             
             // BindItem Information
+            obj = new BindItem("item0","Div00.form.Edit00","value","dsInput","USER_LOGIN");
+            this.addChild(obj.name, obj);
+            obj.bind();
 
+            obj = new BindItem("item1","Div00.form.Edit00_00","value","dsInput","USER_PW");
+            this.addChild(obj.name, obj);
+            obj.bind();
             
             // TriggerItem Information
 
@@ -116,11 +122,10 @@
 
         this.Div00_bt_login_onclick = function(obj,e)
         {
-
              var id = "login";
              var url = "http://localhost:8080/login";
              var reqDs = "dsInput = dsInput";
-             var respDs = "ds_tranction=IDDataset";
+             var respDs = "";
              var args = "";
              var callback = "received";
              this.transaction(id, url, reqDs, respDs, args, callback, true, 0, false);
@@ -132,6 +137,7 @@
         this.on_initEvent = function()
         {
             this.Div00.form.bt_login.addEventHandler("onclick",this.Div00_bt_login_onclick,this);
+            this.Div00.form.Edit00_00.addEventHandler("onchanged",this.Div00_Edit00_00_onchanged,this);
         };
         this.loadIncludeScript("Login.xfdl");
         this.loadPreloadList();
