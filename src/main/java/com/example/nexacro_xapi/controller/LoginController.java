@@ -65,7 +65,18 @@ public class LoginController {
             List<Map<String, String>> requestBody = NexacroConvert.convertDatasetToListMap(dataSet);
             rs = userService.insertUserName(requestBody.get(0));
             if (rs >0) {
-                ResponseEntity entity = new ResponseEntity(0, "SUCCESS", rs);
+                /*ResponseEntity entity = new ResponseEntity(0, "SUCCESS", rs);
+                model.addAttribute("data", entity);*/
+                List<ColumnEntity> columns = NexacroConvert.convertEntityToColumn(new EmployeeEntity());
+
+                List<Dataset> datasets = new ArrayList<>();
+                Dataset dataset = new Dataset();
+                //dataset.setRows(rs);
+                dataset.setColumns(columns);
+                dataset.setId("IDDataset");
+                datasets.add(dataset);
+
+                ResponseEntity entity = new ResponseEntity(0, "SUCCESS", datasets);
                 model.addAttribute("data", entity);
             }
             return "nexacroView";
