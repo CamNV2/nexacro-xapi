@@ -49,7 +49,7 @@ public class GroupController {
 
     @PostMapping("/saveGroup")
     public String saveGroup(Model model, HttpServletRequest request, HttpSession session) {
-        DataSet dataSet = NexacroConvert.getRequestData(request, "dsInput");
+        DataSet dataSet = NexacroConvert.getRequestData(request, "ds_group");
         Map<String, String> group = new HashMap<>();
         List<Map<String, String>> requestBody = NexacroConvert.convertDatasetToListMap(dataSet);
         try {
@@ -76,7 +76,7 @@ public class GroupController {
 
     @PostMapping("/deleteGroup")
     public String deleteGroup(Model model, HttpServletRequest request, HttpSession session) {
-        DataSet dataSet = NexacroConvert.getRequestData(request, "dsInput");
+        DataSet dataSet = NexacroConvert.getRequestData(request, "ds_group");
         int rs = 0;
         List<Map<String, String>> requestBody = NexacroConvert.convertDatasetToListMap(dataSet);
         String user = session.getAttribute("user").toString();

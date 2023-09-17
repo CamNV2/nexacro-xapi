@@ -24,7 +24,7 @@
 
 
             obj = new Dataset("dsInput", this);
-            obj._setContents("<ColumnInfo><Column id=\"USER_LOGIN\" type=\"STRING\" size=\"256\"/><Column id=\"USER_PW\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"USER_LOGIN\">RYU</Col><Col id=\"USER_PW\">123</Col></Row></Rows>");
+            obj._setContents("<ColumnInfo><Column id=\"USER_LOGIN\" type=\"STRING\" size=\"256\"/><Column id=\"USER_PW\" type=\"STRING\" size=\"256\"/><Column id=\"ROLE_ID\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"USER_LOGIN\">RYU</Col><Col id=\"USER_PW\">123</Col></Row></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -117,12 +117,25 @@
         };
         
         // User Script
+        this.registerScript("Register.xfdl", function() {
 
+        this.Div00_bt_login_onclick = function(obj,e)
+        {
+        	 var id = "register";
+             var url = "http://localhost:8080/register";
+             var reqDs = "dsInput = dsInput";
+             var respDs = "";
+             var args = "";
+             var callback = "received";
+             this.transaction(id, url, reqDs, respDs, args, callback, true, 0, false);
+        };
+
+        });
         
         // Regist UI Components Event
         this.on_initEvent = function()
         {
-
+            this.Div00.form.bt_login.addEventHandler("onclick",this.Div00_bt_login_onclick,this);
         };
         this.loadIncludeScript("Register.xfdl");
         this.loadPreloadList();
