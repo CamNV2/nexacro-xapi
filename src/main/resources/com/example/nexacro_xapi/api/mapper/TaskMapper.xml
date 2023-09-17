@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.nexacro_xapi.api.mapper.EmployeeMapper" >
+    <select id="getList"
+            parameterType="com.example.nexacro_xapi.entity.TaskEntity"
+            resultType="com.example.nexacro_xapi.entity.TaskEntity">
+        SELECT
+            *
+        FROM
+            TB_TASK
+        <where>
+            1 = 1
+            <if test="TASK_NM != null and TASK_NM != ''">
+             AND   TASK_NM like '%' || #{TASK_NM} || '%'
+            </if>
+        </where>
+    </select>
+</mapper>

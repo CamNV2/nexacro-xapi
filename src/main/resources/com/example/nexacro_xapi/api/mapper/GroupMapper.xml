@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.nexacro_xapi.mapper.User.EmployeeMapper" >
+    <select id="getListGroup"
+            parameterType="com.example.nexacro_xapi.entity.GroupEntity"
+            resultType="com.example.nexacro_xapi.entity.GroupEntity">
+        SELECT
+            GROUP_ID,
+            GROUP_NM
+        FROM TB_GROUP
+        <where>
+            1 = 1
+            <if test="GROUP_NM != null and GROUP_NM != ''">
+             AND   GROUP_NM like '%' || #{GROUP_NM} || '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="getGroup"
+            parameterType="com.example.nexacro_xapi.entity.GroupEntity"
+            resultType="com.example.nexacro_xapi.entity.GroupEntity">
+        SELECT
+            GROUP_ID
+            ,GROUP_NM
+            ,CREATED_BY
+            ,UPDATED_BY
+            ,CREATED_AT
+            ,UPDATED_AT
+        FROM TB_GROUP
+        <where>
+                GROUP_NM like '%' || #{GROUP_NM} || '%'
+        </where>
+    </select>
+
+    <update id="updateGroup"
+            parameterType="com.example.nexacro_xapi.entity.GroupEntity">
+        UPDATE TB_GROUP
+        SET GROUP_NM = {GROUP_NM}
+            ,UPDATED_BY = #{USERID}
+            ,UPDATED_AT = SYSDATE
+        WHERE GROUP_ID = #{GROUP_ID}
+    </update>
+
+    <update id="deleteGroup"
+            parameterType="com.example.nexacro_xapi.entity.GroupEntity">
+        DELETE FROM TB_GROUP
+        WHERE GROUP_ID = #{GROUP_ID}
+    </update>
+
+    <insert id="addGroup" useGeneratedKeys="true" keyProperty="id"  parameterType="com.example.nexacro_xapi.entity.GroupEntity">
+        INSERT INTO TB_GROUP(
+            , GROUP_NM
+            ,CREATED_BY
+            ,UPDATED_BY
+            ,CREATED_AT
+            ,UPDATED_AT
+        )
+        VALUES (
+            #{GROUP_NM}
+            ,#{USERID}
+            ,#{USERID}
+            ,SYSDATE
+            ,SYSDATE
+        )
+    </insert>
+
+
+</mapper>
