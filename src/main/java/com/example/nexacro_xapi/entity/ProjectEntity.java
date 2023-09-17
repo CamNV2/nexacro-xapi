@@ -12,7 +12,7 @@ import java.util.List;
 public class ProjectEntity {
     @Id
     private String PJ_ID;
-    private String PJNM;
+    private String PJ_NM;
     private String PJ_OWNER;
     private Date PJ_START_DT;
     private Date PJ_END_DT;
