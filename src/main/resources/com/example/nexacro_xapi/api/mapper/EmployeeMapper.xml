@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.nexacro_xapi.api.mapper.EmployeeMapper" >
-    <select id="getList"
-            parameterType="com.example.nexacro_xapi.entity.employee.EmployeeEntity"
-            resultType="com.example.nexacro_xapi.entity.employee.EmployeeEntity">
+    <select id="getAll"
+            parameterType="com.example.nexacro_xapi.entity.EmployeeEntity"
+            resultType="com.example.nexacro_xapi.entity.EmployeeEntity">
         SELECT
+            id,
             name,
             age,
             address,
             role
         FROM
-            TB_USER
+            tb_employee
         <where>
             1 = 1
             <if test="name != null and name != ''">
@@ -18,72 +19,4 @@
             </if>
         </where>
     </select>
-
-
-
-    <select id="findUsersByUsernameAndPassword"
-            parameterType="com.example.nexacro_xapi.entity.employee.EmployeeEntity"
-            resultType="com.example.nexacro_xapi.entity.employee.EmployeeEntity">
-        SELECT
-            count(USR_NM)
-        from
-            TB_USER
-        <where>
-                AND   USR_NM = #{USER_LOGIN}
-                and   USR_PWD = #{USER_PW}
-        </where>
-    </select>
-
-    <select id="getUserByUserName"
-            parameterType="com.example.nexacro_xapi.entity.employee.EmployeeEntity"
-            resultType="com.example.nexacro_xapi.entity.employee.EmployeeEntity">
-        SELECT
-            A.USR_NM,B.ROLE_NM,A.USR_YN,A.LAST_CHG_DT,A.LAST_LOGIN
-        from
-            TB_USER A and TB_ROLE B
-        <where>
-            AND  A.ROLE_ID = B. ROLE_ID
-            AND   A.USR_NM = #{USER_LOGIN}
-        </where>
-    </select>
-
-    <update id="updateTimeLoginUser"
-            parameterType="com.example.nexacro_xapi.entity.employee.EmployeeEntity">
-        UPDATE TB_USER
-        SET LAST_LOGIN = SYSDATE
-        WHERE USERNAME = #{USER_LOGIN}
-    </update>
-
-    <insert id="insertUser"
-            parameterType="com.example.nexacro_xapi.entity.employee.EmployeeEntity">
-        INSERT INTO TB_USER (
-            USR_ID,
-            USR_NM,
-            USR_PWD,
-            USR_ADDRESS,
-            USR_YN,
-            CREATE_ID,
-            CREATE_DT,
-            LAST_CHG_ID,
-            LAST_CHG_DT,
-            LAST_LOGIN,
-            GROUP_ID,
-            ROLE_ID,
-            taskList
-        )VALUES {
-            #{USR_ID},
-            #{USR_NM},
-            #{USR_PWD},
-            "",
-            "1",
-            SYSDATE,
-            SYSDATE,
-            #{USR_ID},
-            SYSDATE,
-            SYSDATE,
-            "",
-            #{ROLE_ID},
-            ""
-        }
-    </insert>
 </mapper>

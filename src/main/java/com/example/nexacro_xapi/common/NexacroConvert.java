@@ -1,14 +1,19 @@
 package com.example.nexacro_xapi.common;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.example.nexacro_xapi.entity.response.ColumnEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nexacro.java.xapi.data.DataSet;
 import com.nexacro.java.xapi.data.PlatformData;
+import com.nexacro.java.xapi.data.Variable;
+import com.nexacro.java.xapi.data.VariableList;
 import com.nexacro.java.xapi.tx.HttpPlatformRequest;
-import jakarta.servlet.http.HttpServletRequest;
 
-import java.io.InputStream;
-import java.util.*;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class NexacroConvert {
 
@@ -22,10 +27,10 @@ public class NexacroConvert {
             PlatformData data = httpPlatformRequest.getData();
             return data.getDataSetList().get(dataSetData);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
+    
     public static List<Map<String, String>> convertDatasetToListMap(DataSet dataSet) {
         List<Map<String, String>> rs = new ArrayList();
 
@@ -58,5 +63,21 @@ public class NexacroConvert {
         }
 
         return columnEntities;
+    }
+    
+    public static String getRequestVariable(HttpServletRequest request, String variable) {
+        try {
+            InputStream inputStream = request.getInputStream();
+            HttpPlatformRequest httpPlatformRequest = new HttpPlatformRequest(inputStream);
+
+            // receive data
+            httpPlatformRequest.receiveData();
+            PlatformData data = httpPlatformRequest.getData();
+            VariableList varList = data .getVariableList();
+            
+            return varList.getString(variable);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

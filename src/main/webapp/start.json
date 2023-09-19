@@ -26,14 +26,12 @@
         ],
         "screen" :
         [    
-        {"id":"Desktop_screen","type":"desktop","themeid":"theme::custom-blue"},
-        {"id":"screen00_02","type":"desktop","themeid":"theme::blue"},
-        {"id":"Screen1","type":"desktop","themeid":"theme::custom-blue"}
+        {"id":"screen00_02","type":"desktop","themeid":"theme::blue"}
         ],
         "xadl" :
         [
         {
-        	"screenid":"screen00_02,Screen0,Screen1",
+        	"screenid":"screen00_02",
         	"launch":"./Application_Desktop.xadl.js",
         	"quickview":"./Application_Desktop.xadl.quickview.js",
         	"form":[

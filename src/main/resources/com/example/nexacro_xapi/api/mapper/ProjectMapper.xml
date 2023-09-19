@@ -1,101 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.nexacro_xapi.mapper.User.EmployeeMapper" >
-    <select id="getAllProjects"
+<mapper namespace="com.example.nexacro_xapi.api.mapper.ProjectMapper" >
+    <select id="getList"
             parameterType="com.example.nexacro_xapi.entity.ProjectEntity"
             resultType="com.example.nexacro_xapi.entity.ProjectEntity">
-        SELECT
-            PJ_ID,
-            PJ_NM,
-            PJ_OWNER,
-            PJ_START_DT,
-            PJ_END_DT,
-            PJ_RESOLVE_DT,
-            PJ_DESC,
-            PJ_YN,
-            PJ_PROCESS,
-            PJ_ACTION,
-            CREATE_ID,
-            CREATE_DT,
-        FROM TB_PROJECT
-
-    </select>
-
-    <select id="getProject"
-            parameterType="com.example.nexacro_xapi.entity.ProjectEntity"
-            resultType="com.example.nexacro_xapi.entity.ProjectEntity">
-        SELECT
-            PJ_ID,
-            PJ_NM,
-            PJ_OWNER,
-            PJ_START_DT,
-            PJ_END_DT,
-            PJ_RESOLVE_DT,
-            PJ_DESC,
-            PJ_YN,
-            PJ_PROCESS,
-            PJ_ACTION,
-            CREATE_ID,
-            CREATE_DT,
-        FROM TB_PROJECT
+        SELECT 
+			id,title
+			,progress
+			,owner_id
+			,status
+			,strt_date
+			,end_date
+			,tag_name
+			,progress_task
+			,template
+			,description
+			,is_access_private
+			,is_tight_prj
+			,is_done
+			,group_id
+		FROM projects
         <where>
-            PJ_NM like '%' || #{PJ_NM} || '%'
+            deleted = false
+            <if test="title != null and title != ''">
+             AND   title like '%' || #{title} || '%'
+            </if>
         </where>
     </select>
-
-    <update id="updateProject"
-            parameterType="com.example.nexacro_xapi.entity.ProjectEntity">
-        UPDATE TB_PROJECT
-        SET PJ_NM = {PJ_NM},
-            PJ_OWNER = {PJ_OWNER},
-            PJ_START_DT = {PJ_START_DT},
-            PJ_END_DT = {PJ_END_DT},
-            PJ_RESOLVE_DT = {PJ_RESOLVE_DT},
-            PJ_DESC = {PJ_DESC},
-            PJ_YN = {PJ_YN},
-            PJ_PROCESS = {PJ_PROCESS},
-            PJ_ACTION = {PJ_ACTION},
-            UPDATED_BY = #{USERID},
-            UPDATED_AT = SYSDATE
-        WHERE PJ_ID = #{PJ_ID}
-    </update>
-
-    <update id="deleteProject"
-            parameterType="com.example.nexacro_xapi.entity.ProjectEntity">
-        DELETE FROM TB_PROJECT
-        WHERE PJ_ID = #{PJ_ID}
-    </update>
-
-    <insert id="createProject" useGeneratedKeys="true" keyProperty="id"  parameterType="com.example.nexacro_xapi.entity.ProjectEntity">
-        INSERT INTO TB_PROJECT(
-            PJ_ID,
-            PJ_NM,
-            PJ_OWNER,
-            PJ_START_DT,
-            PJ_END_DT,
-            PJ_RESOLVE_DT,
-            PJ_DESC,
-            PJ_YN,
-            PJ_PROCESS,
-            PJ_ACTION,
-            CREATE_ID,
-            CREATE_DT,
-        )
-        VALUES (
-            #{PJ_ID},
-            #{PJ_NM},
-            #{PJ_OWNER},
-            #{PJ_START_DT},
-            #{PJ_END_DT},
-            #{PJ_RESOLVE_DT},
-            #{PJ_DESC},
-            #{PJ_YN},
-            #{PJ_PROCESS},
-            #{PJ_ACTION},
-            SYSDATE,
-            SYSDATE
-        )
-    </insert>
-
-
+    <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.nexacro_xapi.entity.ProjectEntity">
+	  	INSERT INTO projects(
+	  		title
+	  		, deleted
+	  		, progress
+	  		, owner_id
+	  		, template
+	  		, strt_date
+	  		, end_date
+	  		, is_tight_prj
+	  		, description
+	  		, group_id
+	  		, tag_name
+	  		, is_access_private
+	  		, status
+	  		, is_done
+	  		, created_at
+	  		, updated_at
+	  		, created_by
+	  		, updated_by
+	  		)
+  		VALUES (
+  			#{title}
+  			, #{deleted}
+  			, #{progress}
+	  		, #{owner_id}
+	  		, #{template}
+	  		, #{strtDate}
+	  		, #{endDate}
+	  		, #{is_tight_prj}
+	  		, #{description}
+	  		, #{group_id}
+	  		, #{tag_name}
+	  		, #{is_access_private}
+	  		, #{status}
+	  		, #{is_done}
+  			, date_trunc('second', now()::timestamp)
+  			, date_trunc('second', now()::timestamp)
+  			, #{created_by}
+  			, #{updated_by}
+  			)
+	</insert>
+	<update id="update" parameterType="com.example.nexacro_xapi.entity.ProjectEntity">
+		UPDATE projects
+		SET title=#{title}
+			, owner_id=#{owner_id}
+			, template=#{template}
+			, strt_date=#{strtDate}
+			, end_date=#{endDate}
+			, description=#{description}
+			, group_id=#{group_id}
+			, tag_name=#{tag_name}
+			, updated_at=date_trunc('second', now()::timestamp)
+			, updated_by=#{updated_by}
+			, is_tight_prj=#{is_tight_prj}
+			, is_access_private=#{is_access_private}
+		WHERE id = #{id}
+	</update>
 </mapper>

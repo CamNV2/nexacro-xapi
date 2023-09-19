@@ -3,7 +3,7 @@ package com.example.nexacro_xapi.entity;
 import lombok.Data;
 
 @Data
-public class TaskEntity {
+public class ReportEntity {
     private int id;
     private String name;
     private int age;

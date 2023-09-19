@@ -34,7 +34,7 @@
 
 
             obj = new Dataset("ds_group", this);
-            obj._setContents("<ColumnInfo><Column id=\"GROUP_ID\" type=\"INT\" size=\"256\"/><Column id=\"GROUP_NM\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"ID\" type=\"INT\" size=\"256\"/><Column id=\"Group_nm\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -129,13 +129,8 @@
 
         this.btn_rtn_obj_onclick = function(obj,e)
         {
-        	var id = "saveGroup";
-             var url = "http://localhost:8080/saveGroup";
-             var reqDs = "dsInput = dsInput";
-             var respDs = "";
-             var args = "";
-             var callback = "received";
-             this.transaction(id, url, reqDs, respDs, args, callback, true, 0, false);
+        	this.opener.fn_parent(this.ds_child);
+        	this.close();
         };
 
         this.btn_rtn_obj2_onclick = function(obj,e)

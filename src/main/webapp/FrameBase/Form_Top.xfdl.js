@@ -134,7 +134,7 @@
             this.addLayout(obj.name, obj);
 
             //-- Normal Layout : this
-            obj = new Layout("screen00_02","screen00_02,Desktop_screen",1080,50,this,
+            obj = new Layout("screen00_02","screen00_02",1080,50,this,
             	//-- Layout function
             	function(p)
             	{

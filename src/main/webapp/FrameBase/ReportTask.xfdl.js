@@ -9,8 +9,8 @@
         
         this.on_create = function()
         {
-            this.set_name("Form_Work");
-            this.set_titletext("Form_Work");
+            this.set_name("ReportTask");
+            this.set_titletext("ReportTask");
             this.set_color("darkorange");
             if (Form == this.constructor)
             {
@@ -49,7 +49,7 @@
             
             // UI Components Initialize
             obj = new Div("Div00","21","10","618","81",null,null,null,null,null,null,this);
-            obj.set_taborder("2");
+            obj.set_taborder("1");
             obj.set_text("Div00");
             this.addChild(obj.name, obj);
 
@@ -65,20 +65,20 @@
             this.Div00.addChild(obj.name, obj);
 
             obj = new Static("Static00","156","48","20","30",null,null,null,null,null,null,this);
-            obj.set_taborder("1");
+            obj.set_taborder("0");
             obj.set_text("⎙ ");
             obj.set_font("normal bold 12pt/normal \"Arial\"");
             obj.set_color("darkorange");
             this.addChild(obj.name, obj);
 
             obj = new Static("Static01_00","362","56","17","19",null,null,null,null,null,null,this);
-            obj.set_taborder("3");
+            obj.set_taborder("2");
             obj.set_text("✆");
             obj.set_font("normal 12pt/normal \"Arial\"");
             this.addChild(obj.name, obj);
 
             obj = new Div("Div01","28","84","730","56",null,null,null,null,null,null,this);
-            obj.set_taborder("4");
+            obj.set_taborder("3");
             obj.set_text("Div01");
             obj.set_background("white");
             obj.set_boxShadow("0px 5px 5px 5px #adadad");
@@ -111,7 +111,7 @@
             this.Div01.addChild(obj.name, obj);
 
             obj = new Div("Div01_00","30","160","730","56",null,null,null,null,null,null,this);
-            obj.set_taborder("5");
+            obj.set_taborder("4");
             obj.set_text("Div01");
             obj.set_background("white");
             obj.set_boxShadow("0px 5px 5px 5px #adadad");
@@ -136,7 +136,7 @@
             this.Div01_00.addChild(obj.name, obj);
 
             obj = new Div("work_info","30","242","730","358",null,null,null,null,null,null,this);
-            obj.set_taborder("6");
+            obj.set_taborder("5");
             obj.set_text("Div01");
             obj.set_background("white");
             obj.set_boxShadow("0px 5px 5px 5px #adadad");
@@ -193,20 +193,21 @@
             obj.set_color("gray");
             this.work_info.form.Div00_00.addChild(obj.name, obj);
 
-            obj = new Static("Static00_00","160","0","155","26",null,null,null,null,null,null,this.work_info.form.Div00_00.form);
+            obj = new Static("Static00_00","160","0","165","26",null,null,null,null,null,null,this.work_info.form.Div00_00.form);
             obj.set_taborder("1");
             obj.set_font("normal 8pt/normal \"Arial\"");
             obj.set_color("black");
-            obj.set_background("url(\'imagerc::avat.png\') no-repeat left center /contain cornsilk");
+            obj.set_background("url(\'imagerc::avat-removebg-preview.png\') no-repeat left center /contain cornsilk");
             obj.set_borderRadius("10px 10px 10px 10px");
+            obj.set_text("");
             this.work_info.form.Div00_00.addChild(obj.name, obj);
 
-            obj = new Static("Static01","190","4","100","17",null,null,null,null,null,null,this.work_info.form.Div00_00.form);
+            obj = new Static("Static01","200","4","100","17",null,null,null,null,null,null,this.work_info.form.Div00_00.form);
             obj.set_taborder("2");
             obj.set_text("Trương Quang Tứ");
             this.work_info.form.Div00_00.addChild(obj.name, obj);
 
-            obj = new Static("Static02","295","2","22","19",null,null,null,null,null,null,this.work_info.form.Div00_00.form);
+            obj = new Static("Static02","305","2","22","19",null,null,null,null,null,null,this.work_info.form.Div00_00.form);
             obj.set_taborder("3");
             obj.set_text("✕");
             this.work_info.form.Div00_00.addChild(obj.name, obj);
@@ -282,6 +283,7 @@
             obj = new Calendar("Calendar00","160","11","165","19",null,null,null,null,null,null,this.work_info.form.Div00_01_00_00.form);
             obj.set_taborder("1");
             obj.set_value("20230408");
+            obj.set_border("0px none");
             this.work_info.form.Div00_01_00_00.addChild(obj.name, obj);
 
             obj = new Div("Div00_01_00_01","15","161","330","35",null,null,null,null,null,null,this.work_info.form);
@@ -300,6 +302,7 @@
             obj = new Calendar("Calendar00","160","5","165","20",null,null,null,null,null,null,this.work_info.form.Div00_01_00_01.form);
             obj.set_taborder("1");
             obj.set_value("20230413");
+            obj.set_border("0px none");
             this.work_info.form.Div00_01_00_01.addChild(obj.name, obj);
 
             obj = new Div("Div00_01_00_00_00","381","159","334","35",null,null,null,null,null,null,this.work_info.form);
@@ -392,6 +395,24 @@
             obj.set_color("gray");
             this.work_info.form.Div00_01_00_01_00_00.addChild(obj.name, obj);
 
+            obj = new Static("Static00_00","160","0","60","26",null,null,null,null,null,null,this.work_info.form.Div00_01_00_01_00_00.form);
+            obj.set_taborder("1");
+            obj.set_font("normal 8pt/normal \"Arial\"");
+            obj.set_color("black");
+            obj.set_borderRadius("10px 10px 10px 10px");
+            obj.set_background("cornsilk");
+            this.work_info.form.Div00_01_00_01_00_00.addChild(obj.name, obj);
+
+            obj = new Static("Static01","170","4","100","17",null,null,null,null,null,null,this.work_info.form.Div00_01_00_01_00_00.form);
+            obj.set_taborder("2");
+            obj.set_text("OK");
+            this.work_info.form.Div00_01_00_01_00_00.addChild(obj.name, obj);
+
+            obj = new Static("Static02","195","2","22","19",null,null,null,null,null,null,this.work_info.form.Div00_01_00_01_00_00.form);
+            obj.set_taborder("3");
+            obj.set_text("✕");
+            this.work_info.form.Div00_01_00_01_00_00.addChild(obj.name, obj);
+
             obj = new Div("Div00_01_00_01_00_00_00","15","270","330","28",null,null,null,null,null,null,this.work_info.form);
             obj.set_taborder("12");
             obj.set_text("Div00");
@@ -459,17 +480,8 @@
             obj.set_index("0");
             this.work_info.form.Div00_01_00_01_00_00_00_00.addChild(obj.name, obj);
 
-            obj = new ImageViewer("ImageViewer00_00","205","480","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("0");
-            obj.set_image("url(\'../image/tag.png\')");
-            obj.set_imagealign("center middle");
-            obj.set_stretch("fit");
-            obj.set_border("0px none");
-            obj.set_tabstop("false");
-            this.addChild(obj.name, obj);
-
             obj = new ImageViewer("ImageViewer00_00_00","392","57","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("7");
+            obj.set_taborder("6");
             obj.set_image("url(\'../image/Information_icon4_orange.svg.png\')");
             obj.set_imagealign("center middle");
             obj.set_stretch("fit");
@@ -478,7 +490,7 @@
             this.addChild(obj.name, obj);
 
             obj = new ImageViewer("ImageViewer00_00_00_00","305","57","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("8");
+            obj.set_taborder("7");
             obj.set_image("url(\'../image/1381552.png\')");
             obj.set_imagealign("center middle");
             obj.set_stretch("fit");
@@ -487,7 +499,7 @@
             this.addChild(obj.name, obj);
 
             obj = new ImageViewer("ImageViewer00_00_01","333","57","15","15",null,null,null,null,null,null,this);
-            obj.set_taborder("9");
+            obj.set_taborder("8");
             obj.set_image("url(\'../image/tag.png\')");
             obj.set_imagealign("center middle");
             obj.set_stretch("fit");
@@ -660,17 +672,18 @@
                 p.Static00_00.set_taborder("1");
                 p.Static00_00.set_font("normal 8pt/normal \"Arial\"");
                 p.Static00_00.set_color("black");
-                p.Static00_00.set_background("url(\'imagerc::avat.png\') no-repeat left center /contain cornsilk");
+                p.Static00_00.set_background("url(\'imagerc::avat-removebg-preview.png\') no-repeat left center /contain cornsilk");
                 p.Static00_00.set_borderRadius("10px 10px 10px 10px");
-                p.Static00_00.move("160","0","155","26",null,null);
+                p.Static00_00.set_text("");
+                p.Static00_00.move("160","0","165","26",null,null);
 
                 p.Static01.set_taborder("2");
                 p.Static01.set_text("Trương Quang Tứ");
-                p.Static01.move("190","4","100","17",null,null);
+                p.Static01.move("200","4","100","17",null,null);
 
                 p.Static02.set_taborder("3");
                 p.Static02.set_text("✕");
-                p.Static02.move("295","2","22","19",null,null);
+                p.Static02.move("305","2","22","19",null,null);
             	}
             );
             this.work_info.form.Div00_00.form.addLayout(obj.name, obj);
@@ -781,6 +794,7 @@
 
                 p.Calendar00.set_taborder("1");
                 p.Calendar00.set_value("20230408");
+                p.Calendar00.set_border("0px none");
                 p.Calendar00.move("160","11","165","19",null,null);
             	}
             );
@@ -812,6 +826,7 @@
 
                 p.Calendar00.set_taborder("1");
                 p.Calendar00.set_value("20230413");
+                p.Calendar00.set_border("0px none");
                 p.Calendar00.move("160","5","165","20",null,null);
             	}
             );
@@ -951,6 +966,21 @@
                 p.Static00.set_font("normal 8pt/normal \"Arial\"");
                 p.Static00.set_color("gray");
                 p.Static00.move("0","0","134","25",null,null);
+
+                p.Static00_00.set_taborder("1");
+                p.Static00_00.set_font("normal 8pt/normal \"Arial\"");
+                p.Static00_00.set_color("black");
+                p.Static00_00.set_borderRadius("10px 10px 10px 10px");
+                p.Static00_00.set_background("cornsilk");
+                p.Static00_00.move("160","0","60","26",null,null);
+
+                p.Static01.set_taborder("2");
+                p.Static01.set_text("OK");
+                p.Static01.move("170","4","100","17",null,null);
+
+                p.Static02.set_taborder("3");
+                p.Static02.set_text("✕");
+                p.Static02.move("195","2","22","19",null,null);
             	}
             );
             this.work_info.form.Div00_01_00_01_00_00.form.addLayout(obj.name, obj);
@@ -1170,57 +1200,49 @@
             );
             this.work_info.form.addLayout(obj.name, obj);
             //-- Default Layout : this
-            obj = new Layout("default","Desktop_screen",790,630,this,
+            obj = new Layout("default","",790,630,this,
             	//-- Layout function
             	function(p)
             	{
                 var rootobj = p;
                 p = rootobj;
-                p.set_titletext("Form_Work");
+                p.set_titletext("ReportTask");
                 p.set_color("darkorange");
 
-                p.Div00.set_taborder("2");
+                p.Div00.set_taborder("1");
                 p.Div00.set_text("Div00");
                 p.Div00.move("21","10","618","81",null,null);
 
-                p.Static00.set_taborder("1");
+                p.Static00.set_taborder("0");
                 p.Static00.set_text("⎙ ");
                 p.Static00.set_font("normal bold 12pt/normal \"Arial\"");
                 p.Static00.set_color("darkorange");
                 p.Static00.move("156","48","20","30",null,null);
 
-                p.Static01_00.set_taborder("3");
+                p.Static01_00.set_taborder("2");
                 p.Static01_00.set_text("✆");
                 p.Static01_00.set_font("normal 12pt/normal \"Arial\"");
                 p.Static01_00.move("362","56","17","19",null,null);
 
-                p.Div01.set_taborder("4");
+                p.Div01.set_taborder("3");
                 p.Div01.set_text("Div01");
                 p.Div01.set_background("white");
                 p.Div01.set_boxShadow("0px 5px 5px 5px #adadad");
                 p.Div01.move("28","84","730","56",null,null);
 
-                p.Div01_00.set_taborder("5");
+                p.Div01_00.set_taborder("4");
                 p.Div01_00.set_text("Div01");
                 p.Div01_00.set_background("white");
                 p.Div01_00.set_boxShadow("0px 5px 5px 5px #adadad");
                 p.Div01_00.move("30","160","730","56",null,null);
 
-                p.work_info.set_taborder("6");
+                p.work_info.set_taborder("5");
                 p.work_info.set_text("Div01");
                 p.work_info.set_background("white");
                 p.work_info.set_boxShadow("0px 5px 5px 5px #adadad");
                 p.work_info.move("30","242","730","358",null,null);
 
-                p.ImageViewer00_00.set_taborder("0");
-                p.ImageViewer00_00.set_image("url(\'../image/tag.png\')");
-                p.ImageViewer00_00.set_imagealign("center middle");
-                p.ImageViewer00_00.set_stretch("fit");
-                p.ImageViewer00_00.set_border("0px none");
-                p.ImageViewer00_00.set_tabstop("false");
-                p.ImageViewer00_00.move("205","480","15","15",null,null);
-
-                p.ImageViewer00_00_00.set_taborder("7");
+                p.ImageViewer00_00_00.set_taborder("6");
                 p.ImageViewer00_00_00.set_image("url(\'../image/Information_icon4_orange.svg.png\')");
                 p.ImageViewer00_00_00.set_imagealign("center middle");
                 p.ImageViewer00_00_00.set_stretch("fit");
@@ -1228,7 +1250,7 @@
                 p.ImageViewer00_00_00.set_tabstop("false");
                 p.ImageViewer00_00_00.move("392","57","15","15",null,null);
 
-                p.ImageViewer00_00_00_00.set_taborder("8");
+                p.ImageViewer00_00_00_00.set_taborder("7");
                 p.ImageViewer00_00_00_00.set_image("url(\'../image/1381552.png\')");
                 p.ImageViewer00_00_00_00.set_imagealign("center middle");
                 p.ImageViewer00_00_00_00.set_stretch("fit");
@@ -1236,7 +1258,7 @@
                 p.ImageViewer00_00_00_00.set_tabstop("false");
                 p.ImageViewer00_00_00_00.move("305","57","15","15",null,null);
 
-                p.ImageViewer00_00_01.set_taborder("9");
+                p.ImageViewer00_00_01.set_taborder("8");
                 p.ImageViewer00_00_01.set_image("url(\'../image/tag.png\')");
                 p.ImageViewer00_00_01.set_imagealign("center middle");
                 p.ImageViewer00_00_01.set_stretch("fit");
@@ -1323,6 +1345,7 @@
             this.work_info.form.Div00.form.cmb_team.addEventHandler("canitemchange",this.Div01_00_00_Div00_01_00_cmb_status_canitemchange,this);
             this.work_info.form.Div00_00.form.Static02.addEventHandler("onclick",this.work_info_Div00_00_Static02_onclick,this);
             this.work_info.form.div_status.form.cmb_status.addEventHandler("canitemchange",this.Div01_00_00_Div00_01_00_cmb_status_canitemchange,this);
+            this.work_info.form.Div00_01_00_01_00_00.form.Static02.addEventHandler("onclick",this.work_info_Div00_00_Static02_onclick,this);
         };
         this.loadIncludeScript("ReportTask.xfdl");
         this.loadPreloadList();

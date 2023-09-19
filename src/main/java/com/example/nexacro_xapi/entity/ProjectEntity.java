@@ -1,38 +1,39 @@
 package com.example.nexacro_xapi.entity;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import com.example.nexacro_xapi.enumeration.StatusEnum;
+import com.example.nexacro_xapi.enumeration.TemplateEnum;
+
 import lombok.Data;
 
-import java.util.Date;
-import java.util.List;
-
-@Entity
-@Table(name = "TB_PROJECT")
 @Data
 public class ProjectEntity {
-    @Id
-    private String PJ_ID;
-    private String PJ_NM;
-    private String PJ_OWNER;
-    private Date PJ_START_DT;
-    private Date PJ_END_DT;
-    private Date PJ_RESOLVE_DT;
-    private String PJ_DESC;
-    private String PJ_YN;
-    private int PJ_PROCESS;
-    private int PJ_ACTION;
-    private String CREATE_ID;
-    private Date CREATE_DT;
-    private String LAST_CHG_ID;
-    private Date LAST_CHG_DT;
+    private int id;
+    private int group_id;
+    private int owner_id;
+    private int progress_task;
+    private int progress;
+    
+    private boolean is_tight_prj;
+    private boolean is_access_private;
+    private boolean is_done;
+    private boolean deleted;
 
-    @ManyToOne
-    @JoinColumn(name = "TEMP_ID")
-    private ProjectTempEntity projectTempEntity;
-    @ManyToOne
-    @JoinColumn(name = "GROUP_ID")
-    private GroupEntity groupEntity;
-
-    @OneToMany(mappedBy = "projectEntity", fetch = FetchType.LAZY)
-    List<TaskEntity> taskEntityList;
+    private TemplateEnum template;
+    private StatusEnum status;
+    
+    private String title;
+    private String strt_date;
+    private String end_date;
+    private LocalDateTime strtDate;
+    private LocalDateTime endDate;
+    private String description;
+    private String tag_name;
+    private String created_by;
+    private String updated_by;
+    
+    private Date created_at;
+    private Date updated_at;
 }

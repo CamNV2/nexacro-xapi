@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <license version="1.2">
-    <product>
-        <name>Nexacro N</name>
-        <version>21</version>
-        <function>Runtime,WebBrowser</function>
-    </product>
-    <customer>
-        <name>TOBESOFT</name>
-        <developerCount>0</developerCount>
-        <rootDomain>0.0.0.0</rootDomain>
-        <targetPlatform>Windows,WindowsRT,macOS,iOS,Android</targetPlatform>
-    </customer>
-    <date>
-        <activation>2023-08-01</activation>
-        <term unit="month">2</term>
-    </date>
-    <key>47GRG4CMJTSKB2V3TSUP1NN9WJRJB4EZE</key>
-    <SignatureValue>rYbPT5xFDmpDwvZkd147v8DlWiBt8mCO+jg2FysnAUHCzn2eWww2+tDqm0hFdwF5
-        OKZmHWAUtLbxTAqLpqO6Ai+fXnE0RjDS8ImGpdpCRJTHwW5KpgU+ZtgVbpvmUlqq
-        CviAy5iw3++dsZmpB2IxlqmI0hMYutA6SWuMfOpIa24oof3l3l2MWc8enST7OmXJ
-        5P9u8G+cFWVLycRXu7qo+y0mWCrq8aQ1EXmc2ChBS2Iep6rs+2DenOACREV3VYIP
-        Ed3T+bkdA1y4LmNu8IX3/VJkuBbST0gsGPCxDbME96YrcqbsXkhnG2/M/aCjvP9z
-        wOomnWMNce/bpfWkkB4obA==</SignatureValue>
+	<product>
+		<name>Nexacro&#32;N</name>
+		<version>21</version>
+		<function>Runtime,WebBrowser</function>
+	</product>
+	<customer>
+		<name>TOBESOFT</name>
+		<coreCount>0</coreCount>
+		<ipAddress>0.0.0.0</ipAddress>
+		<targetPlatform>Windows,WindowsRT,macOS,iOS,Android</targetPlatform>
+	</customer>
+	<date>
+		<activation>2023-08-01</activation>
+		<term unit="month">2</term>
+	</date>
+	<key>TNBTB79CU5DZ4DKKT7EFUWRFNYWC74M7Q</key>
 </license>
