@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.example.nexacro_xapi.entity.response.ColumnEntity;
+import com.example.nexacro_xapi.api.entity.response.ColumnEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nexacro.java.xapi.data.DataSet;
 import com.nexacro.java.xapi.data.PlatformData;
-import com.nexacro.java.xapi.data.Variable;
 import com.nexacro.java.xapi.data.VariableList;
 import com.nexacro.java.xapi.tx.HttpPlatformRequest;
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.example.nexacro_xapi.api.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.nexacro_xapi.api.service.UserService;
 import com.example.nexacro_xapi.common.NexacroConvert;
-import com.example.nexacro_xapi.entity.UserEntity;
-import com.example.nexacro_xapi.entity.response.ColumnEntity;
-import com.example.nexacro_xapi.entity.response.Dataset;
-import com.example.nexacro_xapi.entity.response.ResponseEntity;
+import com.example.nexacro_xapi.api.entity.employee.EmployeeEntity;
+import com.example.nexacro_xapi.api.entity.response.ColumnEntity;
+import com.example.nexacro_xapi.api.entity.response.Dataset;
+import com.example.nexacro_xapi.api.entity.response.ResponseEntity;
 import com.nexacro.java.xapi.tx.PlatformException;
 
 import jakarta.servlet.http.HttpServletRequest;

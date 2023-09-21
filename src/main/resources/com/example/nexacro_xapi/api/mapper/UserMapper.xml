@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.nexacro_xapi.api.mapper.UserMapper" >
     <select id="getList"
-            parameterType="com.example.nexacro_xapi.entity.UserEntity"
-            resultType="com.example.nexacro_xapi.entity.UserEntity">
+            parameterType="com.example.nexacro_xapi.api.entity.UserEntity"
+            resultType="com.example.nexacro_xapi.api.entity.UserEntity">
         SELECT id, username
 			, password
 			, name
@@ -19,4 +19,69 @@
             </if>
         </where>
     </select>
+
+    <select id="findUsersByUsernameAndPassword"
+            parameterType="com.example.nexacro_xapi.api.entity.UserEntity"
+            resultType="int">
+        SELECT
+        COUNT(*) as CNT
+        from
+        TB_USER
+        <where>
+            1=1
+            AND   USR_ID = #{USER_ID}
+            and   USR_PWD = #{USER_PW}
+        </where>
+    </select>
+
+    <select id="getUserByUserName"
+            parameterType="com.example.nexacro_xapi.api.entity.UserEntity"
+            resultType="java.util.Map">
+        SELECT
+        A.USR_ID,A.USR_NM,B.ROLE_NM,A.USR_YN,A.LAST_CHG_DT,A.LAST_LOGIN
+        from
+        TB_USER A , TB_ROLE B
+        <where>
+            1=1
+            AND  A.ROLE_ID = B. ROLE_ID
+            AND   A.USR_ID = #{USER_ID}
+        </where>
+    </select>
+
+    <update id="updateTimeLogin" parameterType="com.example.nexacro_xapi.api.entity.UserEntity">
+        UPDATE TB_USER
+        SET LAST_LOGIN = CURRENT_TIMESTAMP
+        WHERE USR_ID = #{USER_ID}
+    </update>
+
+    <insert id="insertUser"
+            parameterType="com.example.nexacro_xapi.api.entity.UserEntity">
+        INSERT INTO TB_USER (
+            USR_ID,
+            USR_NM,
+            USR_PWD,
+            USR_ADDRESS,
+            USR_YN,
+            CREATE_ID,
+            CREATE_DT,
+            LAST_CHG_ID,
+            LAST_CHG_DT,
+            LAST_LOGIN,
+            GROUP_ID,
+            ROLE_ID
+        )VALUES (
+            #{USER_ID},
+            #{USER_NM},
+            #{USER_PW},
+            null,
+            'Y',
+            #{USER_ID},
+            CURRENT_TIMESTAMP,
+            #{USER_ID},
+            CURRENT_TIMESTAMP,
+            null,
+            null,
+            #{ROLE_ID}
+        )
+    </insert>
 </mapper>

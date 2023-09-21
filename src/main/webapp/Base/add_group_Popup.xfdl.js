@@ -34,7 +34,7 @@
 
 
             obj = new Dataset("ds_group", this);
-            obj._setContents("<ColumnInfo><Column id=\"ID\" type=\"INT\" size=\"256\"/><Column id=\"Group_nm\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"GROUP_ID\" type=\"INT\" size=\"256\"/><Column id=\"GROUP_NM\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -129,8 +129,15 @@
 
         this.btn_rtn_obj_onclick = function(obj,e)
         {
-        	this.opener.fn_parent(this.ds_child);
-        	this.close();
+        	 var nameGr = this.groupNm_txt.value;
+        	 this.ds_group.setColumn(0, "GROUP_NM",nameGr);
+        	 var id = "saveGroup";
+             var url = "http://localhost:8080/Group/saveGroup";
+             var reqDs = "ds_group = ds_group";
+             var respDs = "";
+             var args = "";
+             var callback = "received";
+             this.transaction(id, url, reqDs, respDs, args, callback, true, 0, false);
         };
 
         this.btn_rtn_obj2_onclick = function(obj,e)
@@ -161,6 +168,7 @@
             this.btn_rtn_obj.addEventHandler("onclick",this.btn_rtn_obj_onclick,this);
             this.btn_rtn_obj2.addEventHandler("onclick",this.btn_rtn_obj2_onclick,this);
             this.Static06.addEventHandler("onclick",this.Static06_onclick,this);
+            this.groupNm_txt.addEventHandler("onchanged",this.groupNm_txt_onchanged,this);
         };
         this.loadIncludeScript("add_group_Popup.xfdl");
         this.loadPreloadList();

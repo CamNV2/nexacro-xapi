@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.nexacro_xapi.api.entity.GroupEntity;
+import com.nexacro.java.xapi.data.DataSet;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.nexacro_xapi.api.service.GroupService;
 import com.example.nexacro_xapi.common.NexacroConvert;
-import com.example.nexacro_xapi.entity.GroupEntity;
-import com.example.nexacro_xapi.entity.response.ColumnEntity;
-import com.example.nexacro_xapi.entity.response.Dataset;
-import com.example.nexacro_xapi.entity.response.ResponseEntity;
+import com.example.nexacro_xapi.api.entity.employee.EmployeeEntity;
+import com.example.nexacro_xapi.api.entity.response.ColumnEntity;
+import com.example.nexacro_xapi.api.entity.response.Dataset;
+import com.example.nexacro_xapi.api.entity.response.ResponseEntity;
 import com.nexacro.java.xapi.data.PlatformData;
 import com.nexacro.java.xapi.data.VariableList;
 import com.nexacro.java.xapi.tx.PlatformException;
@@ -26,7 +29,7 @@ import com.nexacro.java.xapi.tx.PlatformException;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("groups")
+@RequestMapping("Group")
 public class GroupController {
 
 	@Autowired
@@ -51,7 +54,62 @@ public class GroupController {
 		return "nexacroView";
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/saveGroup")
+	public String saveGroup(Model model, HttpServletRequest request, HttpSession session) {
+		DataSet dataSet = NexacroConvert.getRequestData(request, "ds_group");
+		Map<String, String> group = new HashMap<>();
+		List<Map<String, String>> requestBody = NexacroConvert.convertDatasetToListMap(dataSet);
+		try {
+			//String user = session.getAttribute("user").toString();
+			String user = "nhan";
+
+			if (requestBody.size() != 0) {
+				group = groupService.saveGroup(requestBody.get(0),user);
+			}
+
+			List<Dataset> datasets = new ArrayList<>();
+			Dataset dataset = new Dataset();
+			dataset.setId("IDDataset");
+			dataset.setColumns(NexacroConvert.convertEntityToColumn(group));
+			datasets.add(dataset);
+			ResponseEntity entity = new ResponseEntity(0, "SUCCESS", datasets);
+			model.addAttribute("data", entity);
+
+			return "nexacroView";
+		}catch (Exception e){
+			throw e;
+		}
+
+	}
+
+	@PostMapping("/deleteGroup")
+	public String deleteGroup(Model model, HttpServletRequest request, HttpSession session) {
+		DataSet dataSet = NexacroConvert.getRequestData(request, "ds_group");
+		int rs = 0;
+		List<Map<String, String>> requestBody = NexacroConvert.convertDatasetToListMap(dataSet);
+		String user = session.getAttribute("user").toString();
+		try {
+			if (requestBody.size() != 0) {
+				rs = groupService.deleteGroup(requestBody.get(0),user);
+			}
+			if (rs >0){
+				List<Dataset> datasets = new ArrayList<>();
+				Dataset dataset = new Dataset();
+				dataset.setId("IDDataset");
+				datasets.add(dataset);
+				ResponseEntity entity = new ResponseEntity(0, "SUCCESS", datasets);
+				model.addAttribute("data", entity);
+			}
+
+			return "nexacroView";
+		}catch (Exception e){
+			throw e;
+		}
+
+
+	}
+
+	/*@PostMapping("/create")
 	public String create(HttpServletRequest request, Model model) throws IOException, PlatformException {
 		Map<String, String> groupInfo = new HashMap<>();
 		int nErrorCode = 0;
@@ -69,6 +127,6 @@ public class GroupController {
 		varList.add("ErrorCode", nErrorCode);
 		varList.add("ErrorMsg", strErrorMsg);
 		return "nexacroView";
-	}
+	}*/
 
 }

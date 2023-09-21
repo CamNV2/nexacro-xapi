@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.nexacro_xapi.api.mapper.TaskMapper" >
     <select id="getList"
-            parameterType="com.example.nexacro_xapi.entity.TaskEntity"
-            resultType="com.example.nexacro_xapi.entity.TaskEntity">
+            parameterType="com.example.nexacro_xapi.api.entity.TaskEntity"
+            resultType="com.example.nexacro_xapi.api.entity.TaskEntity">
         SELECT 
 			id,title
 			, 10 AS progress

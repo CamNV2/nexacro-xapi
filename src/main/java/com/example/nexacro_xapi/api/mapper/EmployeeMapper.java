@@ -1,8 +1,8 @@
 package com.example.nexacro_xapi.api.mapper;
 
+import com.example.nexacro_xapi.api.entity.employee.EmployeeEntity;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.nexacro_xapi.entity.EmployeeEntity;
 
 import java.util.List;
 

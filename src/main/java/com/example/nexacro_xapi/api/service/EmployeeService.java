@@ -1,8 +1,9 @@
 package com.example.nexacro_xapi.api.service;
 
+import com.example.nexacro_xapi.api.entity.employee.EmployeeEntity;
 import com.example.nexacro_xapi.api.mapper.EmployeeMapper;
 import com.example.nexacro_xapi.common.NexacroConvert;
-import com.example.nexacro_xapi.entity.EmployeeEntity;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
