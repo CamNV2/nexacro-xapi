@@ -6,15 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.nexacro_xapi.api.entity.response.ColumnEntity;
+import com.example.nexacro_xapi.api.entity.response.Dataset;
+import com.example.nexacro_xapi.api.entity.response.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.nexacro_xapi.common.NexacroConvert;
-import com.example.nexacro_xapi.entity.response.ColumnEntity;
-import com.example.nexacro_xapi.entity.response.Dataset;
-import com.example.nexacro_xapi.entity.response.ResponseEntity;
 import com.example.nexacro_xapi.enumeration.PriorityEnum;
 import com.example.nexacro_xapi.enumeration.StatusEnum;
 import com.example.nexacro_xapi.enumeration.TemplateEnum;
