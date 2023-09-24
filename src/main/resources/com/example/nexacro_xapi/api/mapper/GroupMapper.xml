@@ -29,7 +29,7 @@
 		,UPDATED_AT
 		FROM TB_GROUP
 		<where>
-			GROUP_NM like '%' || #{GROUP_NM} || '%'
+			GROUP_NM = #{GROUP_NM}
 		</where>
 	</select>
 
@@ -58,7 +58,7 @@
 		,UPDATED_AT
 		)
 		VALUES (
-		'3'
+		 #{GROUP_NM}
 		,#{GROUP_NM}
 		,#{USERID}
 		,#{USERID}

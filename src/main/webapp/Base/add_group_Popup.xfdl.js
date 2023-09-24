@@ -121,6 +121,8 @@
 
         };
 
+        var nameGr = "";
+
         this.btn_rtn_string_onclick = function(obj,e)
         {
         	var strReturn = this.Edit00.value;
@@ -129,7 +131,12 @@
 
         this.btn_rtn_obj_onclick = function(obj,e)
         {
-        	 var nameGr = this.groupNm_txt.value;
+        	 nameGr = this.groupNm_txt.value;
+
+        	 if(nameGr == null){
+        		this.alert("Please enter group name");
+        		return;
+        	 }
         	 this.ds_group.setColumn(0, "GROUP_NM",nameGr);
         	 var id = "saveGroup";
              var url = "http://localhost:8080/Group/saveGroup";
@@ -139,6 +146,14 @@
              var callback = "received";
              this.transaction(id, url, reqDs, respDs, args, callback, true, 0, false);
         };
+
+        this.received = function(id, code, message){
+        	if (code == 0) {
+                  this.alert("Add Group is Success!");
+             } else {
+        	      this.alert("Add Group Failed, Exist group: " +nameGr);
+             }
+        }
 
         this.btn_rtn_obj2_onclick = function(obj,e)
         {

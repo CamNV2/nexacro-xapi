@@ -34,7 +34,7 @@
 
 
             obj = new Dataset("ds_group", this);
-            obj._setContents("<ColumnInfo><Column id=\"ID\" type=\"INT\" size=\"256\"/><Column id=\"Group_nm\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"GROUP_ID\" type=\"STRING\" size=\"256\"/><Column id=\"GROUP_NM\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -95,7 +95,8 @@
             obj.set_innerdataset("ds_user");
             obj.set_codecolumn("id");
             obj.set_datacolumn("name");
-            obj.set_value("");
+            obj.set_text("");
+            obj.set_value("bind: GROUP_NM");
             obj.set_index("-1");
             this.addChild(obj.name, obj);
 
@@ -172,10 +173,10 @@
             obj = new Combo("cbx_group","19","480","301","30",null,null,null,null,null,null,this);
             obj.set_taborder("19");
             obj.set_innerdataset("ds_group");
-            obj.set_codecolumn("ID");
-            obj.set_datacolumn("Group_nm");
+            obj.set_codecolumn("GROUP_ID");
+            obj.set_datacolumn("GROUP_NM");
             obj.set_text("");
-            obj.set_value("");
+            obj.set_value("bind: GROUP_NM");
             obj.set_index("-1");
             this.addChild(obj.name, obj);
 
@@ -237,7 +238,15 @@
             this.addChild(obj.name, obj);
             obj.bind();
 
-            obj = new BindItem("item2","cbx_group","value","ds_user","id");
+            obj = new BindItem("item2","cbx_group","value","ds_group","GROUP_NM");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item3","cbx_group","visible","ds_group","GROUP_NM");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            obj = new BindItem("item4","cbx_group","text","ds_group","GROUP_NM");
             this.addChild(obj.name, obj);
             obj.bind();
             
@@ -259,8 +268,21 @@
         	var objParam  = this.parent.param3;
 
         	this.prjNm_txt.set_value(strParam1);
-
+        	this.getAllGroup();
         };
+
+        this.getAllGroup = function(){
+        	this.ds_group.clear();
+        	 var id = "Group";
+             var url = "http://localhost:8080/Group";
+             var reqDs = "";
+             var respDs = "ds_group=IDDataset";
+             var args = "";
+             var callback = "received";
+             this.transaction(id, url, reqDs, respDs, args, callback, true, 0, false);
+        };
+
+
 
         this.btn_rtn_string_onclick = function(obj,e)
         {
@@ -320,6 +342,11 @@
 
         };
 
+        this.cbx_group_onitemchanged = function(obj,e)
+        {
+
+        };
+
         });
         
         // Regist UI Components Event
@@ -330,6 +357,7 @@
             this.btn_cancel.addEventHandler("onclick",this.btn_rtn_obj_onclick,this);
             this.Static06.addEventHandler("onclick",this.Static06_onclick,this);
             this.addgroup_lbl.addEventHandler("onclick",this.addgroup_lbl_onclick,this);
+            this.cbx_group.addEventHandler("onitemchanged",this.cbx_group_onitemchanged,this);
             this.access_rdo.addEventHandler("onitemchanged",this.Radio00_onitemchanged,this);
             this.Static00_00.addEventHandler("onclick",this.Static00_00_onclick,this);
         };
