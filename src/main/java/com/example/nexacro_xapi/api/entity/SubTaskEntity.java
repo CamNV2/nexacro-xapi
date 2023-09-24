@@ -19,7 +19,7 @@ public class SubTaskEntity {
     private String ST_PRIORITY;
     private String ST_TAG;
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USR_ID")
     private UserEntity userEntity;
 
     @ManyToOne

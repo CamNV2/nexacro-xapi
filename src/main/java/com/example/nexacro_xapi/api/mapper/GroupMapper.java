@@ -19,5 +19,5 @@ public interface GroupMapper {
 
     int deleteGroup (Map<String, String> data);
 
-    GroupEntity getGroup(Map<String, String> data);
+    List<GroupEntity> getGroup(Map<String, String> data);
 }

@@ -57,25 +57,30 @@ public class GroupController {
 	@PostMapping("/saveGroup")
 	public String saveGroup(Model model, HttpServletRequest request, HttpSession session) {
 		DataSet dataSet = NexacroConvert.getRequestData(request, "ds_group");
-		Map<String, String> group = new HashMap<>();
+		int rs = 0;
+		int nErrorCode = 0;
+		String strErrorMsg = "";
 		List<Map<String, String>> requestBody = NexacroConvert.convertDatasetToListMap(dataSet);
 		try {
 			//String user = session.getAttribute("user").toString();
 			String user = "nhan";
 
 			if (requestBody.size() != 0) {
-				group = groupService.saveGroup(requestBody.get(0),user);
+				rs = groupService.saveGroup(requestBody.get(0),user);
+				strErrorMsg = "Tạo mới thành công !";
+			}else {
+				nErrorCode = 1;
+				strErrorMsg = "Tạo mới không thành công !";
 			}
 
-			List<Dataset> datasets = new ArrayList<>();
-			Dataset dataset = new Dataset();
-			dataset.setId("IDDataset");
-			dataset.setColumns(NexacroConvert.convertEntityToColumn(group));
-			datasets.add(dataset);
-			ResponseEntity entity = new ResponseEntity(0, "SUCCESS", datasets);
+			ResponseEntity entity = new ResponseEntity(0, "SUCCESS", rs);
 			model.addAttribute("data", entity);
-
+			/*PlatformData senddata = new PlatformData();
+			VariableList varList = senddata.getVariableList();
+			varList.add("ErrorCode", nErrorCode);
+			varList.add("ErrorMsg", strErrorMsg);*/
 			return "nexacroView";
+
 		}catch (Exception e){
 			throw e;
 		}
