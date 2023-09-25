@@ -1,4 +1,4 @@
-/*
+
 package com.example.nexacro_xapi.api.controller;
 
 import java.io.IOException;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.nexacro_xapi.api.service.ProjectService;
 import com.example.nexacro_xapi.common.NexacroConvert;
-import com.example.nexacro_xapi.api.entity.employee.EmployeeEntity;
 import com.example.nexacro_xapi.api.entity.response.ColumnEntity;
 import com.example.nexacro_xapi.api.entity.response.Dataset;
 import com.example.nexacro_xapi.api.entity.response.ResponseEntity;
@@ -37,26 +36,14 @@ public class ProjectController {
 
     @GetMapping("")
     public String getList(HttpServletRequest request, Model model) throws IOException, PlatformException {
-        
-        DataSet dataInput = NexacroConvert.getRequestData(request, "dsInput");
-        List<Map<String, String>> projects = new ArrayList<>();
-        List<Map<String, String>> requestBody = NexacroConvert.convertDatasetToListMap(dataInput);
-
-        if (requestBody.size() != 0) {
-        	projects = projectService.getList(requestBody.get(0));
-        } else {
-        	projects = projectService.getList(null);
-        }
-
-        
-        projects = projectService.getList(null);
+        List<Map<String, String>> projects = projectService.getList();
 
         List<ColumnEntity> columns = NexacroConvert.convertEntityToColumn(new ProjectEntity());
         List<Dataset> datasets = new ArrayList<>();
         Dataset dataset = new Dataset();
         dataset.setColumns(columns);
         dataset.setRows(projects);
-        dataset.setId("IDDataset");
+        dataset.setId("ds_Project");
 
         datasets.add(dataset);
         ResponseEntity entity = new ResponseEntity(0, "SUCCESS", datasets);
@@ -120,4 +107,4 @@ public class ProjectController {
     }
 
 }
-*/
+

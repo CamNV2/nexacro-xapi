@@ -12,15 +12,20 @@ import java.util.List;
 public class ProjectEntity {
     @Id
     private String PJ_ID;
-    private String PJNM;
+    private String PJ_NM;
     private String PJ_OWNER;
     private Date PJ_START_DT;
     private Date PJ_END_DT;
     private Date PJ_RESOLVE_DT;
     private String PJ_DESC;
+    private String PJ_TAG_NM;
+    private String PJ_STATUS;
     private String PJ_YN;
     private int PJ_PROCESS;
+    private int PJ_PROCESS_TASK;
     private int PJ_ACTION;
+    boolean DELETED;
+    boolean DONE;
     private String CREATE_ID;
     private Date CREATE_DT;
     private String LAST_CHG_ID;
@@ -29,6 +34,7 @@ public class ProjectEntity {
     @ManyToOne
     @JoinColumn(name = "TEMP_ID")
     private ProjectTempEntity projectTempEntity;
+
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
     private GroupEntity groupEntity;

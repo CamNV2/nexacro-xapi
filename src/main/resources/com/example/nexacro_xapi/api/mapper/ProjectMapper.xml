@@ -4,85 +4,78 @@
     <select id="getList"
             parameterType="com.example.nexacro_xapi.api.entity.ProjectEntity"
             resultType="com.example.nexacro_xapi.api.entity.ProjectEntity">
-        SELECT 
-			id,title
-			,progress
-			,owner_id
-			,status
-			,strt_date
-			,end_date
-			,tag_name
-			,progress_task
-			,template
-			,description
-			,is_access_private
-			,is_tight_prj
-			,is_done
-			,group_id
+        SELECT
+			 PJ_ID AS id
+		    ,PJ_NM AS prj_nm
+			,PJ_PROCESS AS progress
+			,PJ_OWNER AS owner_id
+			,PJ_STATUS AS status
+			,PJ_START_DT AS strt_date
+			,PJ_END_DT AS end_date
+			,PJ_TAG_NM AS tag_name
+			,PJ_PROCESS_TASK AS progress_task
+			,TEMPLETEID AS template
+			,PJ_DESC AS description
+			,DONE AS is_done
+			,GROUPID AS group_id
 		FROM projects
         <where>
-            deleted = false
-            <if test="title != null and title != ''">
-             AND   title like '%' || #{title} || '%'
-            </if>
+            DELETED = false
         </where>
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.nexacro_xapi.api.entity.ProjectEntity">
 	  	INSERT INTO projects(
-	  		title
-	  		, deleted
-	  		, progress
-	  		, owner_id
-	  		, template
-	  		, strt_date
-	  		, end_date
-	  		, is_tight_prj
-	  		, description
-	  		, group_id
-	  		, tag_name
-	  		, is_access_private
-	  		, status
-	  		, is_done
-	  		, created_at
-	  		, updated_at
-	  		, created_by
-	  		, updated_by
+			  PJ_NM
+			, DELETED
+			, PJ_PROCESS
+			, PJ_OWNER
+			, TEMPLETEID
+			, PJ_START_DT
+			, PJ_END_DT
+			, PJ_DESC
+			, GROUPID
+			, PJ_TAG_NM
+			, PJ_STATUS
+			, PJ_PROCESS_TASK
+			, DONE
+	  		, CREATE_DT
+	  		, LAST_CHG_DT
+	  		, CREATE_ID
+	  		, LAST_CHG_ID
 	  		)
   		VALUES (
-  			#{title}
-  			, #{deleted}
-  			, #{progress}
-	  		, #{owner_id}
-	  		, #{template}
-	  		, #{strtDate}
-	  		, #{endDate}
-	  		, #{is_tight_prj}
-	  		, #{description}
-	  		, #{group_id}
-	  		, #{tag_name}
-	  		, #{is_access_private}
-	  		, #{status}
-	  		, #{is_done}
+			  #{PJ_NM}
+  			, #{DELETED}
+  			, #{PJ_PROCESS}
+	  		, #{PJ_OWNER}
+	  		, #{TEMPLETEID}
+	  		, #{PJ_START_DT}
+	  		, #{PJ_END_DT}
+	  		, #{PJ_DESC}
+	  		, #{GROUPID}
+	  		, #{PJ_TAG_NM}
+	  		, #{PJ_STATUS}
+			, #{PJ_PROCESS_TASK}
+	  		, #{DONE}
   			, date_trunc('second', now()::timestamp)
   			, date_trunc('second', now()::timestamp)
-  			, #{created_by}
-  			, #{updated_by}
+  			, #{CREATE_ID}
+  			, #{LAST_CHG_ID}
   			)
 	</insert>
 	<update id="update" parameterType="com.example.nexacro_xapi.api.entity.ProjectEntity">
 		UPDATE projects
-		SET title=#{title}
-			, owner_id=#{owner_id}
-			, template=#{template}
-			, strt_date=#{strtDate}
-			, end_date=#{endDate}
-			, description=#{description}
-			, group_id=#{group_id}
-			, tag_name=#{tag_name}
+		SET PJ_NM=#{PJ_NM}
+			, PJ_OWNER=#{PJ_OWNER}
+			, TEMPLETEID=#{TEMPLETEID}
+			, PJ_END_DT=#{PJ_END_DT}
+			, PJ_DESC=#{PJ_DESC}
+			, GROUPID=#{GROUPID}
+		  	, PJ_PROCESS =#{PJ_PROCESS}
+		  	, PJ_PROCESS_TASK =#{PJ_PROCESS_TASK}
+			, PJ_TAG_NM=#{PJ_TAG_NM}
 			, updated_at=date_trunc('second', now()::timestamp)
-			, updated_by=#{updated_by}
-			, is_tight_prj=#{is_tight_prj}
-			, is_access_private=#{is_access_private}
-		WHERE id = #{id}
+			, updated_by=#{LAST_CHG_ID}
+		WHERE PJ_ID = #{PJ_ID}
 	</update>
 </mapper>

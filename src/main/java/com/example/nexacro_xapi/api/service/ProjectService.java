@@ -1,9 +1,9 @@
-/*
+
 package com.example.nexacro_xapi.api.service;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.nexacro_xapi.api.mapper.ProjectMapper;
 import com.example.nexacro_xapi.common.NexacroConvert;
-import com.example.nexacro_xapi.enumeration.StatusEnum;
-import com.example.nexacro_xapi.enumeration.TemplateEnum;
 
 @Service
 public class ProjectService {
@@ -22,13 +20,9 @@ public class ProjectService {
     @Autowired
     private ProjectMapper projectMapper;
 
-    public List<Map<String, String>> getList(Map<String, String> data) {
+    public List<Map<String, String>> getList() {
         List<Map<String, String>> rows = new ArrayList<>();
         ProjectEntity projectEntity = new ProjectEntity();
-
-        if (data != null) {
-        	projectEntity.setTitle(data.get("title"));
-        }
 
         List<ProjectEntity> projectEntities = projectMapper.getList(projectEntity);
         for (ProjectEntity project : projectEntities) {
@@ -43,27 +37,23 @@ public class ProjectService {
     	ProjectEntity projectEntity = new ProjectEntity();
         if (data != null) {
         	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");
-        	DateTimeFormatter frmTime = DateTimeFormatter.ofPattern("HH:mm:ss");
-        	LocalDateTime strtDate = LocalDateTime.parse(data.get("strt_date") + " "+ frmTime.format(LocalDateTime.now()), formatter);
-        	LocalDateTime endDate = LocalDateTime.parse(data.get("end_date") + " "+ frmTime.format(LocalDateTime.now()), formatter);
-        	
-        	projectEntity.setTitle(data.get("title"));
-        	projectEntity.setOwner_id(Integer.parseInt(data.get("owner_id")));
-        	projectEntity.setStrtDate(strtDate);
-        	projectEntity.setProgress(Integer.parseInt(data.get("progress")));
-        	projectEntity.setProgress_task(Integer.parseInt(data.get("progress_task")));
-        	projectEntity.setEndDate(endDate);
-        	projectEntity.setDescription(data.get("description"));
-        	projectEntity.setTag_name(data.get("tag_name"));
-        	projectEntity.set_tight_prj(Boolean.parseBoolean(data.get("_tight_prj")));
-        	projectEntity.set_access_private(Boolean.parseBoolean(data.get("_access_private")));
-        	projectEntity.setGroup_id(Integer.parseInt(data.get("group_id")));
-        	projectEntity.setStatus(StatusEnum.valueOf(data.get("status")));
-        	projectEntity.setTemplate(TemplateEnum.valueOf(data.get("template")));
-        	projectEntity.setDeleted(false);
-        	projectEntity.set_done(false);
-        	projectEntity.setCreated_by("Admin");
-        	projectEntity.setUpdated_by("Admin");
+			Date startDate = (Date)formatter.parse(data.get("strt_date"));
+			Date endDate = (Date)formatter.parse(data.get("end_date"));
+
+			projectEntity.setPJ_NM(data.get("prj_nm"));
+			projectEntity.setPJ_OWNER(data.get("owner_id"));
+        	projectEntity.setPJ_START_DT((startDate));
+        	projectEntity.setPJ_PROCESS(Integer.parseInt(data.get("progress")));
+        	projectEntity.setPJ_END_DT(endDate);
+        	projectEntity.setPJ_DESC(data.get("description"));
+        	projectEntity.setPJ_TAG_NM(data.get("tag_name"));
+        	projectEntity.getGroupEntity().setGROUP_ID(data.get("group_id"));
+        	projectEntity.setPJ_STATUS(data.get("status"));
+        	projectEntity.getProjectTempEntity().setTEMP_ID(data.get("template"));
+        	projectEntity.setDELETED(false);
+        	projectEntity.setDONE(false);
+        	projectEntity.setCREATE_ID("Admin");
+			projectEntity.setCREATE_DT(new Date());
         }
 
         boolean result = projectMapper.create(projectEntity);
@@ -72,29 +62,28 @@ public class ProjectService {
     }
     
     public boolean update(Map<String, String> data) {
-    	ProjectEntity projectEntity = new ProjectEntity();
-        if (data != null) {
-        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");
-        	DateTimeFormatter frmTime = DateTimeFormatter.ofPattern("HH:mm:ss");
-        	LocalDateTime strtDate = LocalDateTime.parse(data.get("strt_date") + " "+ frmTime.format(LocalDateTime.now()), formatter);
-        	LocalDateTime endDate = LocalDateTime.parse(data.get("end_date") + " "+ frmTime.format(LocalDateTime.now()), formatter);
-        	projectEntity.setId(Integer.parseInt(data.get("id")));
-        	projectEntity.setTitle(data.get("title"));
-        	projectEntity.setOwner_id(Integer.parseInt(data.get("owner_id")));
-        	projectEntity.setStrtDate(strtDate);
-        	projectEntity.setEndDate(endDate);
-        	projectEntity.setDescription(data.get("description"));
-        	projectEntity.setTag_name(data.get("tag_name"));
-        	projectEntity.set_tight_prj(Boolean.parseBoolean(data.get("_tight_prj")));
-        	projectEntity.set_access_private(Boolean.parseBoolean(data.get("_access_private")));
-        	projectEntity.setGroup_id(Integer.parseInt(data.get("group_id")));
-        	projectEntity.setTemplate(TemplateEnum.valueOf(data.get("template")));
-        	projectEntity.setUpdated_by("Admin");
-        }
+		ProjectEntity projectEntity = new ProjectEntity();
+		if (data != null) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss");
+			Date endDate = (Date)formatter.parse(data.get("end_date"));
+
+			projectEntity.setPJ_OWNER(data.get("owner_id"));
+			projectEntity.setPJ_START_DT((Date)formatter.parse(data.get("str_date")));
+			projectEntity.setPJ_PROCESS(Integer.parseInt(data.get("progress")));
+			projectEntity.setPJ_END_DT(endDate);
+			projectEntity.setPJ_DESC(data.get("description"));
+			projectEntity.setPJ_TAG_NM(data.get("tag_name"));
+			projectEntity.getGroupEntity().setGROUP_ID(data.get("group_id"));
+			projectEntity.setPJ_STATUS(data.get("status"));
+			projectEntity.getProjectTempEntity().setTEMP_ID(data.get("template"));
+			projectEntity.setDONE(false);
+			projectEntity.setLAST_CHG_ID("Admin");
+			projectEntity.setLAST_CHG_DT(new Date());
+		}
 
         boolean result = projectMapper.update(projectEntity);
 
         return result;
     }
 }
-*/
+
