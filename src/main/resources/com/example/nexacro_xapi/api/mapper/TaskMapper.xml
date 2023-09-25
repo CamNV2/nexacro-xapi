@@ -4,26 +4,46 @@
     <select id="getList"
             parameterType="com.example.nexacro_xapi.api.entity.TaskEntity"
             resultType="com.example.nexacro_xapi.api.entity.TaskEntity">
-        SELECT 
-			id,title
-			, 10 AS progress
-			,(SELECT username FROM users WHERE id = owner_id) owner
-			,status
-			,strt_date
-			,end_date
-			,tag_name
-			,10 AS progress_task
-			,true AS is_done
-			,template
-			,description
-			,is_access_private
-			,is_tight_prj
-		FROM projects
+        SELECT
+			TASK_ID
+			,TASK_NM
+			,TASK_OWNER
+			,TASK_STT
+			,TASK_START_DT
+			,TASK_START_END
+			,TASK_PRIORITY
+			,TASK_TAG
+			,TASK_BILL
+		FROM TB_TASK
         <where>
-            1 = 1
-            <if test="title != null and title != ''">
-             AND   title like '%' || #{title} || '%'
-            </if>
+             AND TASK_ID = #{TASK_ID}
         </where>
     </select>
+	<insert id="addTask"  parameterType="com.example.nexacro_xapi.api.entity.TaskEntity">
+		INSERT INTO TB_TASK(
+							 TASK_ID
+							,TASK_NM
+							,TASK_OWNER
+							,TASK_STT
+							,TASK_START_DT
+							,TASK_START_END
+							,TASK_PRIORITY
+							,TASK_TAG
+							,TASK_BILL
+		)
+		VALUES (
+				   #{TASK_ID}
+			   ,#{TASK_NM}
+			   ,#{TASK_OWNER}
+			   ,#{TASK_STT}
+			   ,#{TASK_START_DT}
+			   ,#{TASK_START_END}
+			   ,#{TASK_PRIORITY}
+			   ,#{TASK_TAG}
+			   ,#{TASK_BILL}
+			   )
+	</insert>
+	<delete id="deleteTask" parameterType="com.example.nexacro_xapi.api.entity.TaskEntity">
+		DELETE FROM TB_TASK WHERE  TASK_ID = #{TASK_ID}
+	</delete>
 </mapper>
